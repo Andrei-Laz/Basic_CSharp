@@ -17,8 +17,7 @@ namespace Ex_7
             if (_head != null)
             {
                 Node current = _head;
-
-                current.Next = toAdd;
+                current.Next = _head;
             }
             else
             {
@@ -30,10 +29,9 @@ namespace Ex_7
         public void InsertAtEnd(int value)
         {
             Node toAdd = new Node();
-            toAdd.Value = value;
-
-            Node current = _head;
             
+            toAdd.Value = value;
+            Node current = _head;
             current.Next = toAdd;
         }
         

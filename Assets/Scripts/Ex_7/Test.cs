@@ -10,6 +10,7 @@ namespace Ex_7
             SinglyLinkedList lista1 = new SinglyLinkedList();
             
             lista1.InsertAtBeginning(12);
+            lista1.InsertAtBeginning(2);
             lista1.ToDisplayString();
         }
 
