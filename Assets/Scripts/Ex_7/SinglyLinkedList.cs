@@ -13,26 +13,27 @@ namespace Ex_7
         {
             Node toAdd = new Node();
             toAdd.Value = value;
-
-            if (_head != null)
-            {
-                Node current = _head;
-                current.Next = _head;
-            }
-            else
-            {
-                _head = toAdd;
-            }
+            toAdd.Next = _head;
+            _head = toAdd;
+            
             _count++;
         }
 
         public void InsertAtEnd(int value)
         {
             Node toAdd = new Node();
-            
             toAdd.Value = value;
-            Node current = _head;
-            current.Next = toAdd;
+
+            if (_head != null)
+            {
+                Node current = _head;
+                current.Next = toAdd;
+            }
+            else
+            {
+                _head = toAdd;
+            }
+            _count++;
         }
         
         public void ToDisplayString()
