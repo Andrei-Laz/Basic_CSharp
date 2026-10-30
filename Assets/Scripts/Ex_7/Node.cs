@@ -6,10 +6,5 @@ namespace Ex_7
     {
         public int Value;
         [CanBeNull] public Node Next;
-
-        // public Node(int value)
-        // {
-        //     Value = value;
-        // }
     }
 }

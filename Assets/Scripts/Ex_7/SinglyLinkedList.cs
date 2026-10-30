@@ -21,30 +21,80 @@ namespace Ex_7
 
         public void InsertAtEnd(int value)
         {
-            Node toAdd = new Node();
-            toAdd.Value = value;
-
             if (_head != null)
             {
+                Node toAdd = new Node();
+                toAdd.Value = value;
+                
                 Node current = _head;
+
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
                 current.Next = toAdd;
             }
             else
             {
-                _head = toAdd;
+                _head = new Node();
+                _head.Value = value;
+                _head.Next = null;
             }
             _count++;
+        }
+
+        public void Remove(int value)
+        {
+            Node current = _head;
+
+            if (current != null)
+            {
+                while (current.Value != value)
+                {
+                    current = current.Next;
+                }
+
+                //current.Value = current.Next.Value;
+                do
+                {
+                    current.Value = current.Next.Value;
+                } while (current.Next != null);
+
+                _count--;
+            }
+            else
+            {
+                Debug.Log("List is empty. Cannot remove Anything");
+            }
         }
         
         public void ToDisplayString()
         {
             Node current = _head;
-            while (current != null) 
-            {
-                Debug.Log(current.Value);
-                current = current.Next;
-            }
+            string list = "";
             
+            if (_head != null)
+            {
+                while (current != null)
+                {
+                    if (current.Next != null)
+                    {
+                        list = list + current.Value + " -> ";
+                    }
+                    else
+                    {
+                        list = list + current.Value;
+                    }
+                    current = current.Next;
+                }
+
+            }
+            else
+            {
+                list = "∅";
+            }
+
+            Debug.Log(list);
         }
-    }
+    }   
 }
