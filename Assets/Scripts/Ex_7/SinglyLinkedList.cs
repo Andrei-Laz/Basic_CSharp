@@ -46,20 +46,18 @@ namespace Ex_7
         public void Remove(int value)
         {
             Node current = _head;
+            Node previous = null;
 
             if (current != null)
             {
                 while (current.Value != value)
                 {
+                    previous = current; 
                     current = current.Next;
                 }
 
-                //current.Value = current.Next.Value;
-                do
-                {
-                    current.Value = current.Next.Value;
-                } while (current.Next != null);
-
+                previous.Next = current.Next;
+                
                 _count--;
             }
             else
