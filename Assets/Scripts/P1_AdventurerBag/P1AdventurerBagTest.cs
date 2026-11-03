@@ -35,6 +35,7 @@ namespace P1_AdventurerBag
             player1.Tryadd(staff);
             player1.TryRemove("Sword");
             player1.Listbackpack();
+            Debug.Log(player1.IsOverload);
         }
     }
 }

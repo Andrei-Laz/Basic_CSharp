@@ -7,6 +7,22 @@ namespace P1_AdventurerBag
     {
         public string Name { get; }
         public float MaxLoad { get; }
+
+        public bool IsOverload
+        {
+            get
+            {
+                if (CurrentLoad > MaxLoad + 0.5 * MaxLoad)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         private readonly List<Item> _backpack = new List<Item>();
 
         public Player(string name, float maxLoad)
@@ -38,7 +54,7 @@ namespace P1_AdventurerBag
 
         public bool CanAdd(Item item)
         {
-            if (item.Weight + CurrentLoad > MaxLoad)
+            if (item.Weight + CurrentLoad > MaxLoad + 0.5 * MaxLoad)
             {
                 return false;
             }
@@ -48,21 +64,19 @@ namespace P1_AdventurerBag
             }
         }
 
-        public void Tryadd(Item item)
+        public bool Tryadd(Item item)
         {
-            float exceededWeight;
-            
             if (CanAdd(item))
             {
                 _backpack.Add(item);
                 Debug.Log($"Item {item.Name} added");
-                //return true;
+                return true;
             }
             else
             {
-                exceededWeight = item.Weight + CurrentLoad - MaxLoad;
+                var exceededWeight = item.Weight + CurrentLoad - MaxLoad + 0.5f * MaxLoad;
                 Debug.LogWarning($"Item {item.Name} not added because it exceeded maximum load by {exceededWeight}");
-                //return false;
+                return false;
             }
         }
 
