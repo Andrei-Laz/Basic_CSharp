@@ -21,13 +21,19 @@ namespace P1_AdventurerBag
             Item coin = new Item("Coin", 2);
 
             player1.Tryadd(sword);
-            player1.Tryadd(spear);
+            player1.Tryadd(sword);
             player1.Tryadd(greatsword);
+            player1.Tryadd(potion);
             player1.Tryadd(bow);
             player1.Tryadd(staff);
             player1.CanAdd(shield);
             player1.CanAdd(potion);
             player1.Tryadd(potion);
+            player1.Listbackpack();
+            player1.TryRemove("Bow");
+            player1.Listbackpack();
+            player1.Tryadd(staff);
+            player1.TryRemove("Sword");
             player1.Listbackpack();
         }
     }

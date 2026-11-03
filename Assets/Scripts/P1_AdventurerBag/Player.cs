@@ -70,13 +70,21 @@ namespace P1_AdventurerBag
         {
             foreach (var item in _backpack)
             {
-                Debug.Log(item);
+                Debug.Log(item.Name);
             }
         }
-        
-        bool TryRemove(string name)
+
+        public bool TryRemove(string name)
         {
-            return true;
+            foreach (var item in _backpack)
+            {
+                if (item.Name == name)
+                {
+                    _backpack.Remove(item);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
