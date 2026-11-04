@@ -4,10 +4,15 @@ namespace P1_AdventurerBag
 {
     public class P1AdventurerBagTest : MonoBehaviour
     {
+        
+        [SerializeField] BackpackBar backpackBar;
+        [SerializeField] private float maxLoad = 100f;
+        
         private void Start()
         {
 
-            Player player1 = new Player("Link", 100);
+            backpackBar.SetMaxLoad(maxLoad);
+            Player player1 = new Player("Link", maxLoad, backpackBar);
 
             Item sword = new Item("Sword", 20);
             Item spear = new Item("Spear", 25);
@@ -22,20 +27,7 @@ namespace P1_AdventurerBag
 
             player1.Tryadd(sword);
             player1.Tryadd(sword);
-            player1.Tryadd(greatsword);
-            player1.Tryadd(potion);
-            player1.Tryadd(bow);
-            player1.Tryadd(staff);
-            player1.CanAdd(shield);
-            player1.CanAdd(potion);
-            player1.Tryadd(potion);
-            player1.Listbackpack();
-            player1.TryRemove("Bow");
-            player1.Listbackpack();
-            player1.Tryadd(staff);
-            player1.TryRemove("Sword");
-            player1.Listbackpack();
-            Debug.Log(player1.IsOverload);
+            Debug.Log(player1.IsOverload); 
         }
     }
 }

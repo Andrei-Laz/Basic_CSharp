@@ -7,6 +7,8 @@ namespace P1_AdventurerBag
     {
         public string Name { get; }
         public float MaxLoad { get; }
+        
+        public BackpackBar BackpackBar { get; set; }
 
         public bool IsOverload
         {
@@ -25,14 +27,15 @@ namespace P1_AdventurerBag
 
         private readonly List<Item> _backpack = new List<Item>();
 
-        public Player(string name, float maxLoad)
+        public Player(string name, float maxLoad, BackpackBar backpackBar)
         {
-            Name = name;
-            MaxLoad = maxLoad;
+            this.Name = name;
+            this.MaxLoad = maxLoad;
+            this.BackpackBar = backpackBar;
         }
         
         public float CurrentLoad
-        {
+        {   
             get
             {
                 float value = 0;
@@ -42,7 +45,6 @@ namespace P1_AdventurerBag
                     {
                         value += item.Weight;
                     }
-
                     return value;
                 }
                 catch (System.Exception)
@@ -70,6 +72,7 @@ namespace P1_AdventurerBag
             {
                 _backpack.Add(item);
                 Debug.Log($"Item {item.Name} added");
+                BackpackBar.SetLoad(CurrentLoad);
                 return true;
             }
             else
@@ -95,6 +98,7 @@ namespace P1_AdventurerBag
                 if (item.Name == name)
                 {
                     _backpack.Remove(item);
+                    BackpackBar.SetLoad(CurrentLoad);
                     return true;
                 }
             }
