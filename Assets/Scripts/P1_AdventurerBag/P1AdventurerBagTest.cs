@@ -26,7 +26,11 @@ namespace P1_AdventurerBag
             Item coin = new Item("Coin", 2);
 
             player1.Tryadd(sword);
-            player1.Tryadd(sword);
+            player1.Tryadd(spear);
+            player1.Tryadd(greatsword);
+            player1.CanAdd(shield);
+            player1.Tryadd(shield);
+            player1.TryRemove("shield");
             Debug.Log(player1.IsOverload); 
         }
     }
