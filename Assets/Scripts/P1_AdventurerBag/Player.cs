@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,15 +25,6 @@ namespace P1_AdventurerBag
                 }
             }
         }
-
-        private readonly List<Item> _backpack = new List<Item>();
-
-        public Player(string name, float maxLoad, BackpackBar backpackBar)
-        {
-            this.Name = name;
-            this.MaxLoad = maxLoad;
-            this.BackpackBar = backpackBar;
-        }
         
         public float CurrentLoad
         {   
@@ -41,9 +33,9 @@ namespace P1_AdventurerBag
                 float value = 0;
                 try
                 {
-                    foreach (var item in _backpack)
+                    foreach (var pickable in _backpack)
                     {
-                        value += item.Weight;
+                        value += pickable.Weight;
                     }
                     return value;
                 }
@@ -54,9 +46,36 @@ namespace P1_AdventurerBag
             }
         }
 
-        public bool CanAdd(Item item)
+        private readonly List<IPickable> _backpack = new List<IPickable>();
+        
+        private readonly List<String> _keys = new List<String>();
+        private readonly List<String> _spells = new List<string>();
+
+        public Player(string name, float maxLoad, BackpackBar backpackBar)
         {
-            if (item.Weight + CurrentLoad > MaxLoad + 0.5 * MaxLoad)
+            this.Name = name;
+            this.MaxLoad = maxLoad;
+            this.BackpackBar = backpackBar;
+        }
+
+        public void AddKey(string id)
+        {
+            _keys.Add(id);
+        }
+
+        public void LearnSpell(string spell)
+        {
+            _spells.Add(spell);
+        }
+
+        public bool HasKey(string id)
+        {
+            return _keys.Contains(id);
+        }
+
+        public bool CanPick(IPickable pickableItem)
+        {
+            if (pickableItem.Weight + CurrentLoad > MaxLoad + 0.5 * MaxLoad)
             {
                 return false;
             }
@@ -66,38 +85,38 @@ namespace P1_AdventurerBag
             }
         }
 
-        public bool Tryadd(Item item)
+        public bool TryPick(IPickable pickableItem)
         {
-            if (CanAdd(item))
+            if (CanPick(pickableItem))
             {
-                _backpack.Add(item);
-                Debug.Log($"Item {item.Name} added");
+                _backpack.Add(pickableItem);
+                Debug.Log($"Item {pickableItem.Name} added");
                 BackpackBar.SetLoad(CurrentLoad);
                 return true;
             }
             else
             {
-                var exceededWeight = item.Weight + CurrentLoad - MaxLoad + 0.5f * MaxLoad;
-                Debug.LogWarning($"Item {item.Name} not added because it exceeded maximum load by {exceededWeight}");
+                var exceededWeight = pickableItem.Weight + CurrentLoad - MaxLoad + 0.5f * MaxLoad;
+                Debug.LogWarning($"Item {pickableItem.Name} not added because it exceeded maximum load by {exceededWeight}");
                 return false;
             }
         }
 
         public void Listbackpack()
         {
-            foreach (var item in _backpack)
+            foreach (var pickable in _backpack)
             {
-                Debug.Log(item.Name);
+                Debug.Log(pickable.Name);
             }
         }
 
         public bool TryRemove(string name)
         {
-            foreach (var item in _backpack)
+            foreach (var pickable in _backpack)
             {
-                if (item.Name == name)
+                if (pickable.Name == name)
                 {
-                    _backpack.Remove(item);
+                    _backpack.Remove(pickable);
                     BackpackBar.SetLoad(CurrentLoad);
                     return true;
                 }

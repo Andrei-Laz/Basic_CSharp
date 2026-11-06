@@ -4,8 +4,6 @@ namespace P1_AdventurerBag
     {
         public string Name { get; }
         public float Weight { get; }
-
-        public string Description { get; set; }
-        
+        public string Description { get; }
     }
 }
