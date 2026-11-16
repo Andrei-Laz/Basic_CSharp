@@ -736,7 +736,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::P1_AdventurerBag.P1AdventurerBagTest
   backpackBar: {fileID: 671873700}
-  maxLoad: 100
 --- !u!1 &2129206643
 GameObject:
   m_ObjectHideFlags: 0
