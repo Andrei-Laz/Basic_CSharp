@@ -5,7 +5,7 @@ namespace P1_AdventurerBag
     public class P1AdventurerBagTest : MonoBehaviour
     {
         
-        [SerializeField] BackpackBar backpackBar;
+        [SerializeField] public BackpackBar backpackBar;
         [SerializeField] private float maxLoad = 100f;
         
         private void Start()

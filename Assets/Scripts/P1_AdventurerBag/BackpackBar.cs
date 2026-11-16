@@ -7,6 +7,7 @@ namespace P1_AdventurerBag
     {
 
         public Slider slider;
+        
 
         public void SetLoad(float load)
         {
@@ -16,6 +17,7 @@ namespace P1_AdventurerBag
         public void SetMaxLoad(float maxLoad)
         {
             slider.maxValue = maxLoad;
+            slider.value = 0f;
         }
     }
 }
